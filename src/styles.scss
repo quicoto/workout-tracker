@@ -43,6 +43,35 @@ $primary: #22a6b3;
 }
 
 /* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  a {
+    padding-bottom: 5px;
+    position: relative;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &::after {
+      background-color: white;
+      bottom: 0;
+      content: '';
+      height: 3px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      transform: scaleX(1);
+      transition: transform 0.3s;
+      width: 100%;
+    }
+  }
+}
+
+/* ==========================================================================
    Circle SVG's
    ========================================================================== */
 
@@ -50,7 +79,7 @@ $primary: #22a6b3;
   display: block;
   margin: 10px auto;
   max-width: 80%;
-  max-height: 250px;
+  max-height: 200px;
 }
 
 .circle-bg {

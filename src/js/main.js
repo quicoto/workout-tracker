@@ -1,6 +1,6 @@
 import store from 'store2';
 import * as templates from './templates';
-import { CONFIG, VALUES } from './config';
+import { INITIAL_DATA, VALUES } from './config';
 import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
 
 (function () {
@@ -10,11 +10,35 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
   }
 
   function _updateCompletion() {
-    _$.completion.innerHTML = templates.completion(_.data.completion);
+    let completion = 0;
+    let totalGoal = 0;
+    let totalDone = 0
+
+    _.data.exercises.forEach(exercise => {
+      totalGoal += exercise.goal;
+      totalDone += exercise.done;
+    });
+
+    completion = Math.floor(totalDone * 100 / totalGoal);
+
+    _$.completion.innerHTML = templates.completion(completion);
+
+    _$.congratulations.setAttribute('hidden', '')
+    if (completion >= 100) _$.congratulations.removeAttribute('hidden')
+  }
+
+  /**
+   * @param  {number} index
+   */
+  function _updateExercise(index) {
+    const id = _.data.exercises[index].id;
+    const $exercise = _$.items.querySelector(`#exercise-${id}`);
+
+    $exercise.innerHTML = templates.itemContent(_.data.exercises[index])
   }
 
   function _renderExercises() {
-    _$.items.innerHTML = templates.items(CONFIG.exercises)
+    _$.items.innerHTML = templates.items(_.data.exercises)
   }
 
   function _saveStorage() {
@@ -24,13 +48,23 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
   function _setElements() {
     _$.completion = document.getElementById('completion');
     _$.items = document.getElementById('items');
+    _$.congratulations = document.getElementById('congratulations');
   }
 
   function _onClick(event) {
     if (!event.target.classList.contains('btn')) return
 
-    // eslint-disable-next-line no-console
-    console.log('button clicked!')
+    const index = _.data.exercises.findIndex(i => i.id === +event.target.dataset.exercise);
+
+    if (_.data.exercises[index].done + +event.target.dataset.count >=0) {
+      _.data.exercises[index].done += +event.target.dataset.count;
+      _.data.exercises[index].completion =
+        Math.floor(_.data.exercises[index].done * 100 / _.data.exercises[index].goal);
+
+      _saveStorage();
+      _updateExercise(index);
+      _updateCompletion();
+    }
   }
 
   function _setEventListeners() {
@@ -39,7 +73,7 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
 
   function _resetData() {
     _.data.date = getDateAsYMD(new Date());
-    _.data.completion = 0;
+    _.data.exercises = INITIAL_DATA.exercises;
   }
 
   function _init() {
