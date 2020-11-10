@@ -7,7 +7,9 @@
     "build": "npm-run-all build:*",
     "build:js": "webpack --config webpack.config.js",
     "build:css": "gulp CSS",
-    "build:html": "gulp minifyHTML"
+    "build:html": "gulp minifyHTML",
+    "lint": "npm-run-all lint:*",
+    "lint:js": "eslint ./src/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   },
   "homepage": "https://github.com/quicoto/workout-tracker#readme",
   "devDependencies": {
+    "eslint": "^7.13.0",
     "gulp-sass": "^4.1.0",
     "node-sass": "^5.0.0",
     "npm-run-all": "^4.1.5",
@@ -29,6 +32,7 @@
   "dependencies": {
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
-    "gulp-htmlmin": "^5.0.1"
+    "gulp-htmlmin": "^5.0.1",
+    "store2": "^2.12.0"
   }
 }
