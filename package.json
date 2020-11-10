@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm-run-all build:*",
+    "build": "npm-run-all lint build:*",
     "build:js": "webpack --config webpack.config.js",
     "build:css": "gulp CSS",
     "build:html": "gulp minifyHTML",
+    "build:fonts": "gulp fonts",
     "lint": "npm-run-all lint:*",
-    "lint:js": "eslint ./src/*.js"
+    "lint:js": "eslint ./src/js/*.js"
   },
   "repository": {
     "type": "git",

@@ -17,3 +17,8 @@ gulp.task('minifyHTML', () => {
     }))
     .pipe(gulp.dest('dist'));
 });
+
+gulp.task('fonts', function() {
+  return gulp.src('./src/fonts/*.*')
+    .pipe(gulp.dest('./dist/fonts'));
+});

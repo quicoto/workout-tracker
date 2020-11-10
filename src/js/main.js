@@ -10,7 +10,7 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
   }
 
   function _updateCompletion() {
-    _$.completion.innerHTML = templates.completion(_.data.completed);
+    _$.completion.innerHTML = templates.completion(_.data.completion);
   }
 
   function _renderExercises() {
@@ -45,7 +45,7 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
       _.data = store(VALUES.storageKey)
     }
 
-    if (!store(VALUES.storageKey) || isMoreNDaysBetweenDates(0, today, _.data.date)) _resetData()
+    if (!store(VALUES.storageKey) || isMoreNDaysBetweenDates(0, _.data.date, today)) _resetData()
 
     _saveStorage();
     _updateCompletion();

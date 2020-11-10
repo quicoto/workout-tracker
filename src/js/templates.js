@@ -1,10 +1,15 @@
 /**
  * @param  {Object} exercise
+ * @param  {string} exercise.name
+ * @param  {number} exercise.qty
+ * @param  {number} exercise.completion
  * @returns  {string}
  */
 function _item(exercise) {
+  if (!exercise.completion) exercise.completion = 0
   return `
 <div class="col">
+  ${_circle(exercise.completion)}
   <h4>${exercise.name}</h4>
   <p>Goal: ${exercise.qty}</p>
 </div>`
@@ -30,7 +35,10 @@ export function items(exercises) {
  * @returns {string}
  */
 export function completion(percentage) {
-  return _circle(percentage);
+  return `
+<div class="col">
+  ${_circle(percentage)}
+</div>`;
 }
 
 /**
@@ -46,7 +54,6 @@ function _circle(percentage) {
   if (percentage === 100) status = 'fourth';
 
   return `
-<div class="col">
   <svg viewBox="0 0 36 36" class="circular-chart ${status}">
     <path class="circle-bg"
       d="M18 2.0845
@@ -61,6 +68,5 @@ function _circle(percentage) {
     />
     <text x="18" y="20.35" class="percentage">${percentage}%</text>
   </svg>
-</div>
 `
 }
