@@ -1,0 +1,34 @@
+{
+  "name": "workout-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:js": "webpack --config webpack.config.js",
+    "build:css": "gulp CSS",
+    "build:html": "gulp minifyHTML"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quicoto/workout-tracker.git"
+  },
+  "author": "Ricard Torres",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quicoto/workout-tracker/issues"
+  },
+  "homepage": "https://github.com/quicoto/workout-tracker#readme",
+  "devDependencies": {
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-htmlmin": "^5.0.1"
+  }
+}
