@@ -4,7 +4,7 @@ export const VALUES = {
 
 export const CONFIG = {
   exercises: [
-    { name: "Push ups", qty: 60 },
-    { name: "Squats", qty: 60 }
+    { id: 0, name: "Push ups", qty: 60 },
+    { id: 1, name: "Squats", qty: 60 }
   ]
 }

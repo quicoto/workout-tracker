@@ -1,17 +1,27 @@
 /**
  * @param  {Object} exercise
+ * @param  {number} exercise.id
  * @param  {string} exercise.name
  * @param  {number} exercise.qty
  * @param  {number} exercise.completion
+ * @param  {number} exercise.done
  * @returns  {string}
  */
 function _item(exercise) {
   if (!exercise.completion) exercise.completion = 0
+  if (!exercise.done) exercise.done = 0
+
   return `
 <div class="col">
   ${_circle(exercise.completion)}
   <h4>${exercise.name}</h4>
-  <p>Goal: ${exercise.qty}</p>
+  <ul>
+    <li>Goal: ${exercise.qty}</li>
+    <li>Done: ${exercise.done}</li>
+  </ul>
+  <p>
+    <button class="btn btn-primary" data-exercise="${exercise.id}">+10</button>
+  </p>
 </div>`
 }
 

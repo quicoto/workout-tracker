@@ -26,8 +26,15 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
     _$.items = document.getElementById('items');
   }
 
+  function _onClick(event) {
+    if (!event.target.classList.contains('btn')) return
+
+    // eslint-disable-next-line no-console
+    console.log('button clicked!')
+  }
+
   function _setEventListeners() {
-    // _$.button.addEventListener('click', _onClick);
+    _$.items.addEventListener('click', _onClick);
   }
 
   function _resetData() {
