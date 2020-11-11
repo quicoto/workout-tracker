@@ -22,3 +22,8 @@ gulp.task('fonts', function() {
   return gulp.src('./src/fonts/*.*')
     .pipe(gulp.dest('./dist/fonts'));
 });
+
+gulp.task('icons', function() {
+  return gulp.src('./src/icons/*.*')
+    .pipe(gulp.dest('./dist/icons'));
+});

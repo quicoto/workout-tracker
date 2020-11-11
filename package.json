@@ -9,6 +9,7 @@
     "build:css": "gulp CSS",
     "build:html": "gulp minifyHTML",
     "build:fonts": "gulp fonts",
+    "build:icons": "gulp icons",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint ./src/js/*.js",
     "watch:js": "webpack --watch --config webpack.config.js --mode=development"
