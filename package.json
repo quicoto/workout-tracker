@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "run-s lint build:* clean:css",
+    "build": "run-s lint build:*",
     "build:js": "webpack --config webpack.config.js",
     "build:css": "gulp CSS",
     "build:html": "gulp minifyHTML",
@@ -12,8 +12,7 @@
     "build:icons": "gulp icons",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint ./src/js/*.js",
-    "watch:js": "webpack --watch --config webpack.config.js --mode=development",
-    "clean:css": "gulp cleanCSS"
+    "watch:js": "webpack --watch --config webpack.config.js --mode=development"
   },
   "repository": {
     "type": "git",
@@ -37,7 +36,6 @@
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
     "gulp-htmlmin": "^5.0.1",
-    "purgecss": "^3.0.0",
     "store2": "^2.12.0"
   }
 }
