@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const sass = require('gulp-sass');
-
+const purify = require('@rmacklin/gulp-purifycss');
 
 gulp.task('CSS', function () {
   return gulp.src('./src/*.scss')
