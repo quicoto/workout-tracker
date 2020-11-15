@@ -69,18 +69,19 @@ export function items(exercises) {
  * @param  {number} percentage
  * @returns {string}
  */
-export function completion(percentage) {
+export function water(percentage) {
   return `
 <div class="col">
-  ${_circle(percentage)}
+  ${_circle(percentage, 'Water')}
 </div>`;
 }
 
 /**
  * @param  {number} percentage
+ * @param  {string} text
  * @returns {string}
  */
-function _circle(percentage) {
+function _circle(percentage, text) {
   let status = 'first';
 
   if (percentage >= 25) status = 'second';
@@ -101,7 +102,7 @@ function _circle(percentage) {
         a 15.9155 15.9155 0 0 1 0 31.831
         a 15.9155 15.9155 0 0 1 0 -31.831"
     />
-    <text x="18" y="20.35" class="percentage">${percentage}%</text>
+    <text x="18" y="20.35" class="percentage">${text ? text : percentage + '%'}</text>
   </svg>
 `
 }

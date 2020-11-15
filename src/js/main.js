@@ -9,24 +9,6 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
     data: {}
   }
 
-  function _updateCompletion() {
-    let completion = 0;
-    let totalGoal = 0;
-    let totalDone = 0
-
-    _.data.exercises.forEach(exercise => {
-      totalGoal += exercise.goal;
-      totalDone += exercise.done;
-    });
-
-    completion = Math.floor(totalDone * 100 / totalGoal);
-
-    _$.completion.innerHTML = templates.completion(completion);
-
-    _$.congratulations.setAttribute('hidden', '')
-    if (completion >= 100) _$.congratulations.removeAttribute('hidden')
-  }
-
   /**
    * @param  {number} index
    */
@@ -41,17 +23,20 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
     _$.items.innerHTML = templates.items(_.data.exercises)
   }
 
+  function _renderWater() {
+    _$.water.innerHTML = templates.water(_.data.water.completion)
+  }
+
   function _saveStorage() {
     store(VALUES.storageKey, _.data)
   }
 
   function _setElements() {
-    _$.completion = document.getElementById('completion');
+    _$.water = document.getElementById('water');
     _$.items = document.getElementById('items');
-    _$.congratulations = document.getElementById('congratulations');
   }
 
-  function _onClick(event) {
+  function _onClickItems(event) {
     if (!event.target.classList.contains('btn')) return
 
     const index = _.data.exercises.findIndex(i => i.id === +event.target.dataset.exercise);
@@ -63,17 +48,25 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
 
       _saveStorage();
       _updateExercise(index);
-      _updateCompletion();
     }
   }
 
+  function _onClickWater() {
+    _.data.water.done++;
+    _.data.water.completion = Math.floor(_.data.water.done * 100 / _.data.water.goal);
+    _saveStorage();
+    _renderWater();
+  }
+
   function _setEventListeners() {
-    _$.items.addEventListener('click', _onClick);
+    _$.items.addEventListener('click', _onClickItems);
+    _$.water.addEventListener('click', _onClickWater);
   }
 
   function _resetData() {
     _.data.date = getDateAsYMD(new Date());
     _.data.exercises = INITIAL_DATA.exercises;
+    _.data.water = INITIAL_DATA.water;
   }
 
   function _init() {
@@ -86,11 +79,13 @@ import { isMoreNDaysBetweenDates, getDateAsYMD } from './utils';
       _.data = store(VALUES.storageKey)
     }
 
-    if (!store(VALUES.storageKey) || isMoreNDaysBetweenDates(0, _.data.date, today)) _resetData()
+    if (!store(VALUES.storageKey) || isMoreNDaysBetweenDates(0, _.data.date, today)){
+      _resetData();
+    }
 
     _saveStorage();
-    _updateCompletion();
     _renderExercises();
+    _renderWater();
   }
 
   _init()
