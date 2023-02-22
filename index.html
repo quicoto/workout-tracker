@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout tracker</title>
+    <style>
+      html {
+        font-size: 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      body {
+        font-family: sans-serif;
+        font-size: 1rem;
+      }
+
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .exercise {
+        margin-bottom: 1.5rem;
+      }
+
+      .exercise label {
+        display: block;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      progress {
+        width: 100%;
+        height: 55px;
+      }
+
+      button {
+        padding: 0.5rem 0.5rem;
+        border: none;
+        border-radius: 0.25rem;
+        background-color: #000;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .reset {
+        background-color: red;
+        color: white;
+      }
+
+      footer {
+        margin-top: 2rem;
+      }
+    </style>
+    <script src="./vue.global.js"></script>
+  </head>
+  <body>
+    <main id="app">
+      <header>
+        <h1>Workout tracker</h1>
+        <div>
+          <button class="reset" @click="reset()">RESET</button>
+        </div>
+      </header>
+      <section>
+        <div class="exercise" v-for="exercise in exercises">
+          <label for="squats">{{ exercise.name }} ({{ exercise.done }}/{{ exercise.goal }}):</label>
+          <progress id="squats" max="100" :value="Math.floor((exercise.done * 100) / exercise.goal)"></progress>
+          <div class="buttons">
+            <button :disabled="exercise.done < 10" @click="exercise.done -= 10">-10</button>
+            <button :disabled="exercise.done >= exercise.goal" @click="exercise.done += 10">+10</button>
+          </div>
+        </div>
+      </section>
+      <footer>
+        Ceated by <a href="https://ricard.dev/">Ricard Torres</a> -
+        <a href="https://github.com/quicoto/workout-tracker">GitHub</a>
+      </footer>
+    </main>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            exercises: [
+              { id: 0, name: "Push ups", goal: 60, done: 0 },
+              { id: 1, name: "Squats", goal: 200, done: 0 },
+            ],
+            water: {
+              goal: 5,
+              completion: 0,
+              done: 0,
+            },
+          };
+        },
+        // add reset method
+        methods: {
+          reset() {
+            this.exercises.forEach((exercise) => {
+              exercise.done = 0;
+            });
+          },
+        },
+        mounted() {
+          const exercices = window.localStorage.getItem('exercices');
+          if (exercices) {
+            this.exercises = JSON.parse(exercices);
+          }
+        },
+        watch: {
+          exercises: {
+            handler(newValue, oldValue) {
+              console.log('hey')
+              window.localStorage.setItem('exercices', JSON.stringify(newValue));
+            },
+            deep: true
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>
