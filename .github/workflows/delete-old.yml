@@ -1,0 +1,35 @@
+name: Delete old closed issues
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # Runs every day at 12PM UTC
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  delete_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old closed issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
+            });
+
+            const oneWeekAgo = new Date();
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+            for (const issue of issues.data) {
+              const closedAt = new Date(issue.closed_at);
+              if (closedAt < oneWeekAgo) {
+                await github.rest.issues.delete({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number
+                });
+              }
+            }
