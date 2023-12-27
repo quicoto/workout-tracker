@@ -14,11 +14,12 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            const date = new Date();
             const issue = {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: "Daily issue",
-              body: `Hello there! This is your daily workout:
+              title: `Workout for ${date.toISOString().split('T')[0]}`,
+              body: `Hello there! This is your workout menu:
               - [ ] 20 pushups
               - [ ] 40 squats
               - [ ] 40 hostages`,

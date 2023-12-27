@@ -1,0 +1,37 @@
+name: Close completed issues
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # Runs every day at 12PM UTC
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  close_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close completed issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+
+            for (const issue of issues.data) {
+              const taskProgress = issue.body.match(/\[.\]/g);
+              if (taskProgress) {
+                const completedTasks = taskProgress.filter(task => task === '[x]').length;
+                const totalTasks = taskProgress.length;
+                if (completedTasks === totalTasks) {
+                  await github.rest.issues.update({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    state: 'closed'
+                  });
+                }
+              }
+            }
