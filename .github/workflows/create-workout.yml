@@ -20,7 +20,8 @@ jobs:
               repo: context.repo.repo,
               title: `Workout for ${date.toISOString().split('T')[0]}`,
               body: `Hello there! This is your workout menu:
-              - [ ] 20 pushups
+              - [ ] 10 pushups
+              - [ ] 10 pushups
               - [ ] 40 squats
               - [ ] 20 lunges
               - [ ] 40 hostages`,
