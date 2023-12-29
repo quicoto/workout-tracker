@@ -2,7 +2,7 @@ name: Create daily issue
 
 on:
   schedule:
-    - cron: '0 8 * * *' # Runs every day at 9AM UTC+1
+    - cron: '15 8 * * *' # Runs every day at 8:15AM UTC+1
   workflow_dispatch: # Allows manual trigger
 
 jobs:
