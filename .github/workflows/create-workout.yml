@@ -1,4 +1,4 @@
-name: Create daily issue
+name: Create Workout
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Delete old closed issues
+name: Delete Old
 
 on:
   schedule:

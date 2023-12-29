@@ -1,4 +1,4 @@
-name: Close completed issues
+name: Close Completed
 
 on:
   schedule:
