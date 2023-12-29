@@ -2,7 +2,7 @@ name: Create Workout
 
 on:
   schedule:
-    - cron: '15 8 * * *' # Runs every day at 8:15AM UTC+1
+    - cron: '15 7 * * *' # Runs every day at 8:15AM CET
   workflow_dispatch: # Allows manual trigger
 
 jobs:
