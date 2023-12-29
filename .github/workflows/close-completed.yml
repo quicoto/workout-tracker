@@ -2,7 +2,7 @@ name: Close completed issues
 
 on:
   schedule:
-    - cron: '0 12 * * *' # Runs every day at 12PM UTC
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
   workflow_dispatch: # Allows manual trigger
 
 jobs:
