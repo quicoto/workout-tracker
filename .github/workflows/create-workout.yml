@@ -22,8 +22,10 @@ jobs:
               body: `Hello there! This is your workout menu:
               - [ ] 10 pushups
               - [ ] 10 pushups
+              - [ ] 10 pushups
               - [ ] 20 lunges
               - [ ] 40 squats
+              - [ ] 40 hostages
               - [ ] 40 hostages`,
               assignees: ['quicoto']
             };
