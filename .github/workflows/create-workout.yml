@@ -28,7 +28,9 @@ jobs:
               - [ ] 20 lunges
               - [ ] 40 squats
               - [ ] 40 hostages
-              - [ ] 40 hostages`,
+              - [ ] 40 hostages
+              - [ ] 20 Calf raises
+              - [ ] 20 Calf raises`,
               assignees: ['quicoto']
             };
             github.rest.issues.create(issue);
