@@ -28,7 +28,7 @@ jobs:
               - [ ] 25 squats
               - [ ] 25 squats
               - [ ] 25 squats
-              - [ ] 10.000 steps
+              - [ ] 10.000 steps`,
               assignees: ['quicoto']
             };
             github.rest.issues.create(issue);
