@@ -20,13 +20,15 @@ jobs:
               repo: context.repo.repo,
               title: `Workout for ${date.toISOString().split('T')[0]}`,
               body: `Hello there! This is your workout menu:
-              - [ ] 20 pushups
-              - [ ] 20 pushups
+              - [ ] 10 Pushups
+              - [ ] 10 Pushups
+              - [ ] 10 Pushups
               - [ ] 20 Hostages
               - [ ] 20 Hostages
-              - [ ] 25 squats
-              - [ ] 25 squats
-              - [ ] 25 squats`,
+              - [ ] 20 Hostages
+              - [ ] 20 Squats
+              - [ ] 20 Squats
+              - [ ] 20 Squats`,
               assignees: ['quicoto']
             };
             github.rest.issues.create(issue);
