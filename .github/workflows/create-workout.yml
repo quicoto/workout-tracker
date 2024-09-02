@@ -22,11 +22,10 @@ jobs:
               body: `Hello there! This is your workout menu:
               - [ ] 10 Pushups
               - [ ] 10 Pushups
-              - [ ] 10 Pushups
               - [ ] 20 Hostages
               - [ ] 20 Hostages
-              - [ ] 20 Hostages
-              - [ ] 20 Squats
+              - [ ] 20 Lunges
+              - [ ] 20 Lunges
               - [ ] 20 Squats
               - [ ] 20 Squats`,
               assignees: ['quicoto']
