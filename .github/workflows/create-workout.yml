@@ -22,12 +22,7 @@ jobs:
               body: `Hello there! This is your workout menu:
               - [ ] 10 Pushups
               - [ ] 10 Pushups
-              - [ ] 20 Hostages
-              - [ ] 20 Hostages
-              - [ ] 20 Calf raises
-              - [ ] 20 Calf raises 
-              - [ ] 20 Squats
-              - [ ] 20 Squats`,
+              - [ ] Toothbrush set (20, 20, 20)`,
               assignees: ['quicoto']
             };
             github.rest.issues.create(issue);
