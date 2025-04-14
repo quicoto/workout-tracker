@@ -22,7 +22,7 @@ jobs:
               body: `Hello there! This is your workout menu:
               - [ ] 10 Pushups
               - [ ] 10 Pushups
-              - [ ] Toothbrush set (20, 20, 20)`,
+              - [ ] Toothbrush set (40, 40, 40)`,
               assignees: ['quicoto']
             };
             github.rest.issues.create(issue);
